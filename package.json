@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build --delete-output-path --prod",
+    "build": "ng build --delete-output-path --prod --deployUrl /database/static/assets/",
     "package": "./node_modules/.bin/rimraf dist/packaging/* && ./node_modules/.bin/webpack --env.configuration=prod",
     "serve-packaged": "./node_modules/.bin/http-server dist/packaging/strongbox-database-ui -a 127.0.0.1 -p 4207 -g -c-1 --no-dotfiles -o  /",
     "ci-build": "npm run build && npm run package",

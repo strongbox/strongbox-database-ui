@@ -25,7 +25,7 @@ const assetsStaticPath = (appendPath) => {
 const originalPackagePath = targetPath(appName);
 const newPackagingRootPath = targetPath('packaging');
 const newPackagingTempPath = targetPath('packaging/tmp');
-const newPackageAppPath = targetPath('packaging/' + appName);
+const newPackageAppPath = targetPath('packaging/' + appName + '/database');
 
 console.log('');
 console.log('Original angular package path: ', originalPackagePath);
@@ -102,6 +102,11 @@ module.exports = {
             }
         }),
         new FileManagerPlugin({
+            onStart: {
+                mkdir: [
+                    newPackageAppPath
+                ]
+            },
             onEnd: {
                 move: [
                     {
@@ -115,7 +120,7 @@ module.exports = {
                 ],
                 delete: [newPackagingTempPath],
                 archive: [{
-                    source: newPackageAppPath,
+                    source: newPackageAppPath + '/../', // we need to have the `./database` path in the zip.
                     destination: newPackagingRootPath + '/' + appName + '.zip',
                     format: 'zip',
                     options: {
