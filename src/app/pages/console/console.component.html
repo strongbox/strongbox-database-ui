@@ -1,0 +1,4 @@
+<div class="fullscreen">
+    <app-console-query #query></app-console-query>
+    <app-console-query-result [result]="query.result$" *ngIf="(query.result$ | async )"></app-console-query-result>
+</div>

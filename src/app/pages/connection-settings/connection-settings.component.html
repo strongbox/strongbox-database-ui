@@ -1,0 +1,61 @@
+<div class="settings">
+    <form [formGroup]="form">
+        <mat-form-field>
+            <input matInput placeholder="Label" formControlName="label">
+        </mat-form-field>
+
+        <mat-form-field>
+            <input matInput placeholder="Host" formControlName="host">
+        </mat-form-field>
+
+        <mat-form-field>
+            <input matInput placeholder="Port" formControlName="port">
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Protocol</mat-label>
+            <mat-select formControlName="protocol">
+                <mat-option *ngFor="let type of availableProtocols" [value]="type.id" [disabled]="type.id > 1">{{type.label}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field>
+            <mat-label>Gremlin Version</mat-label>
+            <mat-select formControlName="gremlinVersion">
+                <mat-option *ngFor="let type of availableGremlinVersions" [value]="type.id">{{type.label}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <button mat-raised-button color="primary" (click)="saveForm(index)" [disabled]="form.invalid || form.pristine" style="margin-left: 10px;">Save</button>
+    </form>
+
+    <div class="clearfix">&nbsp;</div>
+
+    <div fxLayout="row wrap" fxLayoutGap="20px">
+        <mat-card *ngFor="let config of settingsService.getSavedConfigurations(); let index = index" fxFlex="25">
+            <mat-card-title>#{{ index }} {{ config.label }}</mat-card-title>
+            <mat-card-content style="padding-top: 15px;">
+                <p>
+                    <span class="label">Host:</span> {{ config.host }}
+                </p>
+                <p>
+                    <span class="label">Port:</span> {{ config.port }}
+                </p>
+                <p>
+                    <span class="label">Protocol:</span> {{ availableProtocols[config.protocol].label }}
+                </p>
+                <p>
+                    <span class="label">Gremlin Version:</span> {{ availableGremlinVersions[config.gremlinVersion].label || "N/A" }}
+                </p>
+            </mat-card-content>
+            <mat-card-actions>
+                <button mat-button (click)="updateForm(index)">Edit</button>
+                <button mat-button color="warn" (click)="settingsService.deleteConfiguration(index)">Delete</button>
+                <button mat-raised-button color="primary"
+                        style="float: right;"
+                        (click)="db.connect(config)"
+                        [disabled]="db.isConnected()">Connect</button>
+            </mat-card-actions>
+        </mat-card>
+    </div>
+</div>

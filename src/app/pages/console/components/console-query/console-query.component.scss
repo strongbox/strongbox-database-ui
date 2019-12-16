@@ -1,0 +1,88 @@
+@import "../../../../../sass/variables";
+
+$queryActionsWidth: 240px;
+
+.query-card {
+  overflow: hidden;
+  padding: 0px 10px 10px 10px;
+
+  .query {
+    position: relative;
+
+    .queryTextArea {
+      ::ng-deep {
+        .mat-input-element {
+          max-width: calc(90% - #{$queryActionsWidth});
+        }
+
+        .mat-form-field-wrapper {
+          padding-bottom: 0px;
+        }
+
+        .mat-form-field-infix {
+          margin-top: -3px;
+        }
+      }
+    }
+
+    .actions {
+      position: absolute;
+      top: 5px;
+      right: 10px;
+      z-index: 99;
+      width: $queryActionsWidth;
+
+      ::ng-deep {
+        .mat-select-arrow-wrapper {
+          position: relative;
+          margin-left: -15px !important;
+        }
+
+        .mat-select-value-text {
+          color: $nav-link-color;
+        }
+      }
+    }
+
+  }
+
+  mat-card-content {
+    padding-top: 0px;
+    position: relative;
+
+    .history {
+      max-height: 300px;
+      overflow: auto;
+
+      ::ng-deep .mat-list-base {
+        padding-top: 0px;
+      }
+    }
+  }
+
+  mat-card-actions {
+    position: relative;
+    width: 100%;
+    margin-left: 0px;
+    margin-top: 5px;
+  }
+
+  mat-card-actions:before {
+    content: " ";
+    box-sizing: border-box;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    background: #2384be;
+    height: 1px;
+  }
+}
+
+.query-loading {
+  width: 105%;
+  position: absolute;
+  top: 0px;
+  left: -15px;
+  height: 2px;
+}

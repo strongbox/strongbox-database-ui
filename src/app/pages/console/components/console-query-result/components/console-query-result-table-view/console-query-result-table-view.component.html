@@ -1,0 +1,49 @@
+<div class="inputFullWidth tableConstraint">
+
+    <ng-container *ngIf="isTableViewAvailable()">
+        <mat-selection-list fxLayout="row wrap" [formControl]="displayedColumns" [compareWith]="compareSelected">
+            <mat-list-option *ngFor="let column of selectableColumns"
+                             fxFlex="300px"
+                             checkboxPosition="before"
+                             color="primary"
+                             value="{{ column }}"
+            >
+                {{column}}
+            </mat-list-option>
+        </mat-selection-list>
+
+        <table mat-table [dataSource]="dataSource" style="width: 100%; margin-top: 20px;" *ngIf="hasSelectedColumns()">
+            <ng-container *ngFor="let column of displayedColumns.value" [cdkColumnDef]="column">
+                <th mat-header-cell *matHeaderCellDef>{{column}}</th>
+                <td mat-cell *matCellDef="let record"
+                    [class.noPaddingColumn]="isObject(getColumnValue(record, column))">
+                    <ng-template #normal>{{ getColumnValue(record, column) }}</ng-template>
+                    <ng-template #jsonView>
+                        <app-console-query-result-json-view [result]="getColumnValue(record, column)" position="top">
+                        </app-console-query-result-json-view>
+                    </ng-template>
+                    <ng-container *ngIf="isObject(getColumnValue(record, column)); then jsonView; else normal"></ng-container>
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns.value"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns.value;"></tr>
+        </table>
+    </ng-container>
+
+    <ng-container *ngIf="!isTableViewAvailable()">
+        <div class="failedToDisplay">
+            <span>Could not generate the view for this query because:</span>
+            <ol>
+                <li>No data was returned</li>
+                <li>The returned <code>JSON</code> response cannot be displayed in a table view</li>
+                <li>
+                    Or an error occurred while converting the response into the necessary format.<br>
+                    Please check the browser console for any errors and open an issue with the example query response.<br>
+                    Note: you can use <code>Raw</code> json view for that.
+                </li>
+            </ol>
+        </div>
+    </ng-container>
+
+</div>

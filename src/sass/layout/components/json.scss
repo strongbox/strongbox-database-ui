@@ -1,0 +1,13 @@
+.ngx-json-viewer .segment {
+  .segment-main .toggler::after {
+    display: inline-block;
+    font-family: "Ionicons";
+    font-size: 17px;
+    color: rgba(255,255,255,0.8);
+    content: "\f284" !important;
+  }
+
+  .segment-key {
+    color: hsla(203, 54%, 67%, 1) !important;
+  }
+}

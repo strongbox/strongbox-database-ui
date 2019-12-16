@@ -1,0 +1,10 @@
+@import '../../variables';
+
+.mat-autocomplete-panel {
+  background: $panel-background;
+  margin-top: 2px;
+}
+
+.mat-autocomplete-panel .mat-option.mat-selected:not(.mat-active):not(:hover) {
+  background: rgba(0, 0, 0, 0.12);
+}

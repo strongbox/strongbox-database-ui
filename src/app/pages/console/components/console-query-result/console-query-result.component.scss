@@ -1,0 +1,67 @@
+$cardPadding: 16px;
+
+.resultViewModes {
+  li {
+    float: left;
+    margin-left: 20px;
+    list-style: none;
+  }
+
+  li:first-of-type {
+    margin-left: 0px;
+  }
+}
+
+.mat-card {
+  padding: $cardPadding;
+
+  .mat-card-content {
+    padding-top: 10px;
+  }
+
+  &.noCardContentPadding {
+    padding: 0px;
+
+    .mat-card-title:before {
+      left: $cardPadding;
+      width: calc(100% - calc(#{$cardPadding} * 2));
+    }
+
+    .mat-card-title {
+      padding: $cardPadding $cardPadding 0 $cardPadding;
+    }
+
+    .mat-card-content {
+      padding: 2px 0px 0px 0px;
+    }
+  }
+}
+
+::ng-deep {
+  .graphResultView {
+    .graphContainer {
+      height: calc(70vh - 20px) !important;
+    }
+  }
+
+  .noCardContentPadding {
+    .failedToDisplay {
+      padding: calc(#{$cardPadding + 10px}) $cardPadding $cardPadding $cardPadding;
+    }
+  }
+
+  .failedToDisplay {
+    padding-top: 15px;
+    padding-bottom: 15px;
+
+    ol {
+      margin-top: 15px;
+      margin-left: 20px;
+
+      li {
+        line-height: 20px;
+        margin-bottom: 8px;
+      }
+    }
+  }
+}

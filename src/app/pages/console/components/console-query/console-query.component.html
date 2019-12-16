@@ -1,0 +1,74 @@
+<mat-card class="query-card mat-elevation-z4">
+    <mat-progress-bar *ngIf="(waiting$ | async)"
+                      class="query-loading"
+                      color="primary"
+                      mode="indeterminate"></mat-progress-bar>
+
+    <mat-card-content class="inputFullWidth">
+        <div class="query">
+            <mat-form-field floatLabel="never" class="queryTextArea">
+                    <textarea #queryTextArea
+                              (keyup)="onInputKey($event)"
+                              [formControl]="queryFormControl"
+                              (focusin)="showHelp = true"
+                              (focusout)="showHelp = false"
+                              cdkTextareaAutosize
+                              matInput
+                              placeholder="Click here to write a query"></textarea>
+            </mat-form-field>
+
+            <div class="actions"
+                 fxLayout="row"
+                 fxLayoutGap="4%"
+                 fxLayoutAlign="end baseline"
+            >
+                <div fxFlex="30%">
+                    <mat-select [formControl]="queryTypeFormControl">
+                        <mat-option *ngFor="let type of queryTypes"
+                                    [value]="type.id">{{type.label | lowercase}}</mat-option>
+                    </mat-select>
+                </div>
+
+                <div>
+                    <a href="#"
+                       *ngIf="history.length > 0"
+                       (click)="showHistory = !showHistory" [class.active]="showHistory">History</a>
+                </div>
+
+                <div fxFlex="30%">
+                    <button (click)="execute()"
+                            [disabled]="!executable()"
+                            color="primary"
+                            mat-button>
+                        Execute
+                    </button>
+                </div>
+            </div>
+
+            <div *ngIf="!showHistory && showHelp" [@slideInOut]>
+                <mat-hint>
+                    <div fxLayout="column" fxLayout.gt-sm="row" fxLayoutGap="5px" fxHide.lt-sm>
+                        <div><small>Ctrl + Enter sends the query;</small></div>
+                        <div><small>Alt + H toggles history view;</small></div>
+                        <div><small>Alt + L executes last query from history</small></div>
+                    </div>
+                </mat-hint>
+            </div>
+
+            <ng-container *ngIf="!databaseService.isConnected()" [@slideInOut]>
+                <span>Connect to a database source to enable query execution.</span>
+            </ng-container>
+        </div>
+
+        <div *ngIf="showHistory" class="history" [@slideInOut]>
+            <small style="margin-bottom: 10px;">History</small>
+            <mat-action-list #historyList>
+                <button *ngFor="let query of history"
+                        mat-list-item
+                        (click)="selectQueryFromHistory(query)">
+                    {{ query.type }}: {{query.query}}
+                </button>
+            </mat-action-list>
+        </div>
+    </mat-card-content>
+</mat-card>

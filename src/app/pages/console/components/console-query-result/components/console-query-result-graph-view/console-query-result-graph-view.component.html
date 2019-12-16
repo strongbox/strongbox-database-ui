@@ -1,0 +1,27 @@
+<div class="failedToDisplay" [hidden]="isGraphViewAvailable()">
+    <span>Could not generate the view for this query because:</span>
+    <ol>
+        <li>No data was returned</li>
+        <li>The returned <code>JSON</code> response cannot be displayed in a graph view</li>
+        <li>
+            Or an error occurred while converting the response into the necessary format.<br>
+            Please check the browser console for any errors and open an issue with the example query response.<br>
+            Note: you can use <code>Raw</code> json view for that.
+        </li>
+    </ol>
+</div>
+
+<div id="graphContainer"
+     class="graphContainer"
+     #graphContainer
+     [hidden]="!isGraphViewAvailable()"
+     [style.display]="isGraphViewAvailable() ? '' : 'none'">
+    <div class="controls" fxLayout="column" fxLayoutGap="5px">
+        <div>
+            <button mat-button (click)="zoom('in')"><i class="ion-md-add"></i></button>
+        </div>
+        <div>
+            <button mat-button (click)="zoom('out')"><i class="ion-md-remove"></i></button>
+        </div>
+    </div>
+</div>

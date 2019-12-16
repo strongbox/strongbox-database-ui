@@ -1,0 +1,55 @@
+<ng-container *ngIf="!(loading | async) && (result | async) as result">
+    <mat-card style="margin-top: 20px; margin-bottom: 20px;" [class.noCardContentPadding]="isGraphView()"
+              class="mat-elevation-z4">
+        <mat-card-title>
+            <div fxLayout="row">
+                <div fxLayout="column" fxFlex="auto" class="resultViewModes">
+                    <div>
+                        <ul>
+                            <li>
+                                <a href="#"
+                                   [class.active]="isGraphView()"
+                                   [class.disabled]="disableGraphView"
+                                   (click)="setGraphView()"
+                                >
+                                    <i class="ion-md-git-network"></i> Graph
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#"
+                                   [class.active]="isTableView()"
+                                   [class.disabled]="disableTableView"
+                                   (click)="setTableView()"
+                                >
+                                    <i class="ion-md-grid"></i> Table
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#"
+                                   [class.active]="isJsonView()"
+                                   (click)="setJsonView()"
+                                >
+                                    <i class="ion-md-code"></i> JSON
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div fxLayout="column">
+                    <div>
+                        <span *ngIf="result.isSuccess()" class="status-green">{{ result.status.code }} / success</span>
+                        <span *ngIf="!result.isSuccess()" class="status-red">{{ result.status.code }} / failed</span>
+                    </div>
+                </div>
+            </div>
+        </mat-card-title>
+        <mat-card-content [class.contentPadding]="!isGraphView()">
+            <app-console-query-result-json-view [result]="result"
+                                                *ngIf="isJsonView()"></app-console-query-result-json-view>
+            <app-console-query-result-table-view [result]="result"
+                                                 *ngIf="isTableView()"></app-console-query-result-table-view>
+            <app-console-query-result-graph-view [result]="result" *ngIf="isGraphView()"
+                                                 class="graphResultView"></app-console-query-result-graph-view>
+        </mat-card-content>
+    </mat-card>
+</ng-container>

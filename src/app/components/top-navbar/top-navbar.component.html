@@ -1,0 +1,25 @@
+<div class="header-navigation" fxLayout="row" fxFlexAlign="center center" fxFlexFill>
+    <div class="menu">
+        <ul>
+            <li>
+                <a title="Console" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                    <i class="icon ion-md-play"></i> Console
+                </a>
+            </li>
+            <li>
+
+                <a title="Schema" routerLink="/schema" routerLinkActive="active">
+                    <i class="icon ion-md-grid"></i> Schema
+                </a>
+            </li>
+            <li>
+                <a title="Settings" routerLink="/connection" routerLinkActive="active">
+                    <i class="icon ion-md-settings"></i> Settings
+                </a>
+            </li>
+            <li *ngIf="databaseService.isConnected()" style="margin-top: -5px;">
+                <button mat-button color="warn" (click)="databaseService.disconnect()">Disconnect</button>
+            </li>
+        </ul>
+    </div>
+</div>

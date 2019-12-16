@@ -1,0 +1,16 @@
+.mat-card {
+  padding: 0px  !important;
+  overflow: hidden;
+
+  .mat-card-content {
+    padding: 0px !important;
+  }
+
+  .mat-table {
+    .mat-row:last-of-type {
+      td.mat-cell {
+        border-bottom-color: transparent !important;
+      }
+    }
+  }
+}

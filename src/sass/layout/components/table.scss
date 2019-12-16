@@ -1,0 +1,130 @@
+@import "../../variables";
+
+.mat-table-container {
+  border-radius: 5px;
+  overflow: hidden;
+  border: 1px solid $table-row-color;
+}
+
+// remove the border from the last row in the table.
+.no-last-row-border {
+  tr.mat-row {
+    &:last-of-type {
+      td.mat-cell, td.mat-footer-cell {
+        border-bottom: none;
+      }
+    }
+  }
+}
+
+.mat-table {
+  background: none;
+
+  thead .mat-header-row {
+    background: $table-row-color;
+  }
+
+  thead .mat-header-row.blue-bottom-border {
+    .mat-header-cell {
+      border-bottom: 1px solid rgb(44, 130, 188);
+    }
+  }
+
+  thead .mat-header-cell {
+    font-size: 15px;
+  }
+
+  tbody, tfoot {
+    background: transparent;
+  }
+
+  tbody tr:hover {
+    background: rgba(255, 255, 255, 0.09);
+    color: #1f3240;
+  }
+
+  tbody tr:active {
+    background: rgba(255, 255, 255, 0.05);
+    color: #1f3240;
+  }
+
+  tr.mat-header-row {
+    height: 46px !important;
+  }
+
+  tr.mat-row {
+    height: 40px !important;
+  }
+
+  th .mat-checkbox-inner-container, td .mat-checkbox-inner-container {
+    width: 16px;
+    height: 16px;
+
+    .mat-checkbox-frame {
+      border-width: 1px;
+    }
+  }
+
+  .mat-cell, .mat-header-cell {
+    padding: 10px 10px 10px 24px;
+  }
+
+  // necessary to align the action icons to the right.
+  .mat-cell.actions {
+    padding-right: 0px;
+    padding-left: 10px;
+  }
+
+  th.actions, td.actions {
+    text-align: center;
+
+    $icon-size: 30px;
+
+    .mat-icon-button {
+      width: $icon-size;
+      height: $icon-size;
+      line-height: calc(#{$icon-size} - 10px);
+      color: $nav-link-color;
+      transition: color 0.2s;
+    }
+
+    .mat-icon-button:hover:not([disabled]) {
+      color: $nav-link-hover;
+    }
+
+    .mat-icon-button[disabled] {
+      position: relative;
+      color: rgba(255, 255, 255, 0.25);
+
+      &:after {
+        content: "";
+        position: absolute;
+        border-top: 1px solid #c7cbcd;
+        width: 18px;
+        -webkit-transform: rotate(45deg);
+        -ms-transform: rotate(45deg);
+        transform: rotate(-45deg);
+        -webkit-transform-origin: 0% 0%;
+        -ms-transform-origin: 0% 0%;
+        transform-origin: 0% 0%;
+        left: 8px;
+        top: 21px;
+      }
+    }
+
+    ul {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+
+      li {
+        display: block;
+        flex: 0 1 auto; /* Default */
+        margin-right: 15px;
+        list-style: none;
+      }
+    }
+
+  }
+}

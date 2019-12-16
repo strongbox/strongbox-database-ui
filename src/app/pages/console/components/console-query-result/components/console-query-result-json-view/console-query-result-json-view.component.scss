@@ -1,0 +1,25 @@
+.jsonContainer {
+  width: 100%;
+  height: 100%;
+  position: relative;
+
+  ::ng-deep {
+    .toggler {
+      margin-left: -11px !important;
+      margin-top: 2px !important;
+    }
+  }
+
+  .modeSwitch.right {
+    position: absolute;
+    top: 0px;
+    right: 10px;
+    z-index: 99;
+  }
+
+  .modeSwitch.top {
+    position: relative;
+    right: -15px;
+    top: -5px;
+  }
+}
