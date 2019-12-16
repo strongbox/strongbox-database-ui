@@ -3,7 +3,7 @@ import {plainToClass} from 'class-transformer';
 import {QueryResponse} from '../query-result.model';
 import {TableViewData} from './table-view-data';
 
-fdescribe('TableViewData', () => {
+describe('TableViewData', () => {
     it('should convert valid cypher response 1', () => {
         const queryResponse = plainToClass(QueryResponse, JSON.parse(validCypherResponse1));
         const converted = new TableViewData(queryResponse);
