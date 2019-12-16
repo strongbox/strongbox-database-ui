@@ -18,7 +18,7 @@ export class ConsoleQueryResultJsonViewComponent implements OnInit, OnDestroy, A
     result: QueryResponse = null;
 
     @ViewChild('jsonViewer', {static: false, read: NgxJsonViewerComponent})
-    jsonView: NgxJsonViewerComponent;
+    jsonView: NgxJsonViewerComponent = null;
 
     prettyView: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
 
@@ -54,12 +54,14 @@ export class ConsoleQueryResultJsonViewComponent implements OnInit, OnDestroy, A
     }
 
     toggleJsonPaths() {
-        this.jsonView.segments.filter(segment => {
-            if (segment.key === 'result' || segment.key === 'status') {
-                this.jsonView.toggle(segment);
-            }
-        });
-        this.cdr.markForCheck();
+        if (this.jsonView !== null) {
+            this.jsonView.segments.filter(segment => {
+                if (segment.key === 'result' || segment.key === 'status') {
+                    this.jsonView.toggle(segment);
+                }
+            });
+            this.cdr.markForCheck();
+        }
     }
 
 }

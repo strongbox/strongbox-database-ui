@@ -18,9 +18,15 @@
                     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
                 </table>
 
-                <ng-container *ngIf="dataSource.data.length === 0">
+                <ng-container *ngIf="dataSource.data.length === 0 && !(loading$ | async)">
                     <div style="padding: 20px;">
                         No results found.
+                    </div>
+                </ng-container>
+
+                <ng-container *ngIf="dataSource.data.length === 0 && (loading$ | async)">
+                    <div style="padding: 20px;">
+                        Waiting for database response...
                     </div>
                 </ng-container>
             </ng-template>
