@@ -59,19 +59,15 @@ pipeline {
             }
         }
         stage('Tests') {
-            parallel {
-                stage('ci-test') {
-                    steps {
-                        script {
-                            container("node") {
-                                try {
-                                    sh "npm run ci-test"
-                                } catch (e) {
-                                    if(!params.FORCE_DEPLOY) {
-                                        currentBuild.result = 'FAILURE'
-                                        throw e
-                                    }
-                                }
+            steps {
+                script {
+                    container("node") {
+                        try {
+                            sh "npm run ci-test"
+                        } catch (e) {
+                            if(!params.FORCE_DEPLOY) {
+                                currentBuild.result = 'FAILURE'
+                                throw e
                             }
                         }
                     }
