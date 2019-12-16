@@ -90,6 +90,7 @@ export class ConsoleQueryComponent implements OnInit, OnDestroy, AfterContentIni
                 if (state === ConnectionStateEnum.CONNECTED) {
                     this.queryFormControl.enable();
                     this.queryTypeFormControl.enable();
+                    this.focusInput();
                 } else {
                     this.queryFormControl.disable();
                     this.queryTypeFormControl.disable();

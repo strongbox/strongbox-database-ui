@@ -1,16 +1,9 @@
 <div class="jsonContainer">
-
     <div class="modeSwitch" [class.top]="position === 'top'" [class.right]="position === 'right'">
         <a href="#" (click)="prettyView.next(true)" [class.active]="(prettyView | async) === true">Pretty</a> |
         <a href="#" (click)="prettyView.next(false)" [class.active]="(prettyView | async) === false">Raw</a>
     </div>
 
-    <ng-template #jsonPrettyViewTemplate>
-        <ngx-json-viewer [json]="result" [expanded]="false" #jsonViewer></ngx-json-viewer>
-    </ng-template>
-    <ng-template #jsonRawViewTemplate>
-        <pre style="width: 100%; overflow: auto;">{{ result | json }}</pre>
-    </ng-template>
-
-    <ng-container *ngIf="(prettyView | async) && hasResult(); then jsonPrettyViewTemplate; else jsonRawViewTemplate"></ng-container>
+    <ngx-json-viewer [json]="result" [expanded]="false" *ngIf="(prettyView | async) === true && result" #jsonViewer></ngx-json-viewer>
+    <pre style="width: 100%; overflow: auto;" *ngIf="(prettyView | async) === false">{{ result | json }}</pre>
 </div>

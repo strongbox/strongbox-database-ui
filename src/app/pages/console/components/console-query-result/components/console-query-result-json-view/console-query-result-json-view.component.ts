@@ -49,12 +49,8 @@ export class ConsoleQueryResultJsonViewComponent implements OnInit, OnDestroy, A
         }, 5);
     }
 
-    hasResult() {
-        return this.result !== null && this.result !== undefined && this.result instanceof QueryResponse;
-    }
-
     toggleJsonPaths() {
-        if (this.jsonView !== null) {
+        if (this.jsonView && this.result !== null) {
             this.jsonView.segments.filter(segment => {
                 if (segment.key === 'result' || segment.key === 'status') {
                     this.jsonView.toggle(segment);
