@@ -37,8 +37,14 @@
                 </div>
                 <div fxLayout="column">
                     <div>
-                        <span *ngIf="result.isSuccess()" class="status-green">{{ result.status.code }} / success</span>
-                        <span *ngIf="!result.isSuccess()" class="status-red">{{ result.status.code }} / failed</span>
+                        <span [class.status-green]="result.isSuccess()"
+                              [class.status-red]="!result.isSuccess()"
+                        >
+                            {{ result.status.code }}
+                            <ng-container *ngIf="result.isSuccess()">success</ng-container>
+                            <ng-container *ngIf="!result.isSuccess()">failed</ng-container> /
+                            {{ executionTime|number }} s
+                        </span>
                     </div>
                 </div>
             </div>

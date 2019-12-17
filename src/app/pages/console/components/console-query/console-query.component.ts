@@ -28,6 +28,7 @@ export class ConsoleQueryComponent implements OnInit, OnDestroy, AfterContentIni
 
     result$: BehaviorSubject<QueryResponse> = new BehaviorSubject<QueryResponse>(null);
     waiting$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+    executionTime$: BehaviorSubject<number> = new BehaviorSubject<number>(0);
 
     showHistory = false;
     showHelp = false;
@@ -215,10 +216,15 @@ export class ConsoleQueryComponent implements OnInit, OnDestroy, AfterContentIni
 
         this.saveHistory(query);
 
+        const startTime = -performance.now();
+
+        this.executionTime$.next(0);
+
         this.databaseService
             .execute(query)
             .subscribe(
                 (result: QueryResponse) => {
+                    this.executionTime$.next(((startTime + performance.now()) / 1000));
                     this.result$.next(result);
                     this.waiting$.next(false);
                 },

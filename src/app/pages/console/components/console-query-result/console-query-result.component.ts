@@ -16,6 +16,9 @@ export class ConsoleQueryResultComponent implements OnInit {
     @Input()
     loading: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
+    @Input()
+    executionTime = 0;
+
     viewType: ViewQueryResultTypes = ViewQueryResultTypes.JSON;
 
     disableGraphView = false;
