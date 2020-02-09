@@ -166,13 +166,7 @@ export class WebSocketConnection extends AbstractConnection {
             }
         });
 
-        const initialQuery = new GremlinQueryRequest(`
-nodes = g.V().groupCount().by(label);
-nodesprop = g.V().valueMap().select(keys).groupCount();
-edges = g.E().groupCount().by(label);
-edgesprop = g.E().valueMap().select(keys).groupCount();
-[nodes.toList(),nodesprop.toList(),edges.toList(),edgesprop.toList()]
-        `);
+        const initialQuery = new GremlinQueryRequest(`1+1`);
 
         this.execute(initialQuery)
             .pipe(takeUntil(this.destroy$), take(1))
