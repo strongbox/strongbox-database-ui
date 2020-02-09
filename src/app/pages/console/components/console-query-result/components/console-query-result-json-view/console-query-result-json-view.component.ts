@@ -17,7 +17,7 @@ export class ConsoleQueryResultJsonViewComponent implements OnInit, OnDestroy, A
     @Input()
     result: QueryResponse = null;
 
-    @ViewChild('jsonViewer', {static: false, read: NgxJsonViewerComponent})
+    @ViewChild('jsonViewer', { read: NgxJsonViewerComponent })
     jsonView: NgxJsonViewerComponent = null;
 
     prettyView: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);

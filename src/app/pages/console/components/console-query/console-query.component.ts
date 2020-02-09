@@ -38,7 +38,7 @@ export class ConsoleQueryComponent implements OnInit, OnDestroy, AfterContentIni
     @ViewChild('queryTextArea', {static: true, read: ElementRef})
     private queryTextArea: ElementRef;
 
-    @ViewChild('historyList', {static: false, read: MatList})
+    @ViewChild('historyList', { read: MatList })
     private historyList: MatList;
 
     private destroy$: Subject<any> = new Subject();

@@ -20,7 +20,7 @@ export class ConsoleQueryResultTableViewComponent implements OnInit, OnDestroy {
     displayedColumns: FormControl = new FormControl();
     dataSource: MatTableDataSource<any> = new MatTableDataSource<any>([]);
 
-    @ViewChild('jsonViewer', {static: false, read: NgxJsonViewerComponent})
+    @ViewChild('jsonViewer', { read: NgxJsonViewerComponent })
     jsonView: NgxJsonViewerComponent;
 
     tableViewData: TableViewData = null;
