@@ -1,5 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {MatTableDataSource} from '@angular/material';
+import { MatTableDataSource } from '@angular/material/table';
 
 import {DatabaseService} from '../../services/database.service';
 import {CypherQueryRequest} from '../../models/query.model';

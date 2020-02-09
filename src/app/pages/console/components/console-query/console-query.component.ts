@@ -1,6 +1,6 @@
 import {AfterContentInit, Component, ElementRef, HostListener, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {FormControl, Validators} from '@angular/forms';
-import {MatList} from '@angular/material';
+import { MatList } from '@angular/material/list';
 import {BehaviorSubject, Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
 
