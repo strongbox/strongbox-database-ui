@@ -1,6 +1,6 @@
 import {Component, Input, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {FormControl} from '@angular/forms';
-import {MatTableDataSource} from '@angular/material';
+import { MatTableDataSource } from '@angular/material/table';
 import {NgxJsonViewerComponent} from 'ngx-json-viewer';
 import {Subject} from 'rxjs';
 
@@ -20,7 +20,7 @@ export class ConsoleQueryResultTableViewComponent implements OnInit, OnDestroy {
     displayedColumns: FormControl = new FormControl();
     dataSource: MatTableDataSource<any> = new MatTableDataSource<any>([]);
 
-    @ViewChild('jsonViewer', {static: false, read: NgxJsonViewerComponent})
+    @ViewChild('jsonViewer', { read: NgxJsonViewerComponent })
     jsonView: NgxJsonViewerComponent;
 
     tableViewData: TableViewData = null;

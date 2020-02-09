@@ -1,6 +1,6 @@
 import {AfterContentInit, Component, ElementRef, HostListener, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {FormControl, Validators} from '@angular/forms';
-import {MatList} from '@angular/material';
+import { MatList } from '@angular/material/list';
 import {BehaviorSubject, Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
 
@@ -38,7 +38,7 @@ export class ConsoleQueryComponent implements OnInit, OnDestroy, AfterContentIni
     @ViewChild('queryTextArea', {static: true, read: ElementRef})
     private queryTextArea: ElementRef;
 
-    @ViewChild('historyList', {static: false, read: MatList})
+    @ViewChild('historyList', { read: MatList })
     private historyList: MatList;
 
     private destroy$: Subject<any> = new Subject();
