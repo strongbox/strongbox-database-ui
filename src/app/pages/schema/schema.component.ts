@@ -1,8 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import { MatTableDataSource } from '@angular/material/table';
 
 import {DatabaseService} from '../../services/database.service';
-import {CypherQueryRequest} from '../../models/query.model';
+import {GremlinQueryRequest} from '../../models/query.model';
 import {QueryResponse} from '../../models/query-result.model';
 import {BehaviorSubject, Subject} from 'rxjs';
 import {filter, finalize, take, takeUntil} from 'rxjs/operators';
@@ -15,9 +14,9 @@ import {ConnectionStateEnum} from '../../models/connection.model';
 })
 export class SchemaComponent implements OnInit, OnDestroy {
 
-    displayedColumns: string[] = ['node', 'count'];
-    dataSource: MatTableDataSource<any> = new MatTableDataSource<any>([]);
     loading$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
+
+    result: any;
 
     private destroy$: Subject<any> = new Subject();
 
@@ -47,13 +46,11 @@ export class SchemaComponent implements OnInit, OnDestroy {
     }
 
     getLabels() {
-        const query = new CypherQueryRequest(`
-MATCH (n)
-WITH DISTINCT labels(n) AS labels, count(*) AS count
-UNWIND labels AS label
-RETURN DISTINCT label, count
-ORDER BY label, count
-`);
+        const query = new GremlinQueryRequest(`
+JanusGraphManagement jgm = ((org.janusgraph.core.JanusGraph)g.getGraph()).openManagement();
+String schema = jgm.printSchema();
+jgm.rollback();
+[schema]`);
 
         this.loading$.next(true);
         this.db
@@ -62,13 +59,7 @@ ORDER BY label, count
                 this.loading$.next(false);
             }))
             .subscribe((response: QueryResponse) => {
-                if (response.result.data['@type'] === 'g:List') {
-                    const data = [];
-                    for (const [index, record] of response.result.data['@value'].entries()) {
-                        data.push({node: record['@value'][1], count: record['@value'][3]['@value'] || 0});
-                    }
-                    this.dataSource.data = data;
-                }
+                this.result = response.result.data['@value'][0];
             });
     }
 
